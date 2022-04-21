@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import Student from '../student/Student';
 
-const students = [
-	{
-		name: 'Lucas Guardiola',
-		courses: [
-			{ name: 'Curso React JS', hours: 60 }
-		]
-	},
-	{
-		name: 'Nico Gomez Tolosa',
-		courses: [
-			{ name: 'Curso Angular', hours: 100 }
-		]
-	}
-];
-
 class StudentsList extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			students: students
+			students: []
 		};
+	}
+
+	componentDidMount() {
+		fetch('/api/students.json')
+				.then(response => response.json())
+				.then(students => {
+					this.setState(() => ({
+						students: students
+					}));
+				});
 	}
 
 	render() {

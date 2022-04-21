@@ -17,22 +17,36 @@ class Student extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			all: false,
 			courses: this.props.student.courses
 		};
-		this.addCourse = this.addCourse.bind(this);
+		this.toggleCourse = this.toggleCourse.bind(this);
 	}
 
-	addCourse() {
+	toggleCourse() {
+		if (this.state.all) {
+			this.setState(() => ({
+				courses: this.props.student.courses
+			}));
+		} else {
+			fetch('/api/courses.json')
+					.then(response => response.json())
+					.then(courses => {
+						this.setState(() => ({
+							courses: courses
+						}));
+					});
+		}
 		this.setState((state) => ({
-			courses: [...state.courses, randomCourses[Math.floor(Math.random() * 9)]]
+			all: !state.all
 		}));
 	}
 
 	render() {
 		return (
 				<div>
-					<p>{ this.props.student.name }</p>
-					<button onClick={ this.addCourse }>Inscribirme</button>
+					<p>{ this.props.student.firstName } { this.props.student.lastName }</p>
+					<button onClick={ this.toggleCourse }>{ this.state.all ? 'Mostar inscripciones' : 'Mostrar todos' }</button>
 					<table className="course">
 						<thead>
 						<tr>

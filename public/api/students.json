@@ -1,0 +1,22 @@
+[
+  {
+    "firstName": "Lucas",
+    "lastName": "Guardiola",
+    "courses": [
+      {
+        "name": "Curso React JS",
+        "hours": 60
+      }
+    ]
+  },
+  {
+    "firstName": "Nicolas",
+    "lastName": "Gomez-Tolosa",
+    "courses": [
+      {
+        "name": "Curso Angular",
+        "hours": 100
+      }
+    ]
+  }
+]
